@@ -2,63 +2,91 @@ const array = ["ROCK", "PAPER", "SCISSOR"];
 
 let user = 0;
 let computer =0;
-
+let gameCount= 0;
+const btn = document.querySelectorAll('button');
+const currWin = document.querySelector('.current-winner');
+const GameOver = document.querySelector('.Game-Over');
+const UserScore = document.querySelector('.User-Score');
+const CompScore= document.querySelector('.Comp-Score');
+const FinalMsg= document.querySelector('.Final-Message');
+const div= document.querySelector('div');
 getComputerChoice = ()=> {
     randomChoice = array[(Math.floor(Math.random() * array.length))];
     return randomChoice;
 }
-play = (userChoice,computerChoice) => {
-        if(userChoice == computerChoice){
-            return "Its a tie!";
+btn.forEach(function(e){e.addEventListener('click',() => {
+        userChoice = e.textContent;
+        userChoice = userChoice.toUpperCase();
+        computerChoice = getComputerChoice();
+        
+        if(gameCount >=5){
+            GameOver.textContent = "GAME OVER";
+            if(user > computer){
+                FinalMsg.textContent = "Congratulations you won";
+            }
+            else if(user == computer){
+                FinalMsg.textContent = "The match is a tie";
+
+            }
+            else{
+                FinalMsg.textContent = "uhooh! YOU LOST!!";
+            }
+            const para = document.createElement('p');
+            para.textContent = "Resetting Game in 10 seconds....";
+            div.appendChild(para);
+            setTimeout(()=>{
+                user = 0;
+                computer =0;
+                gameCount =0;
+                GameOver.textContent ="";
+                FinalMsg.textContent ="";
+                UserScore.textContent = "Your score : " + user;
+                CompScore.textContent = "Computer score : " + computer;
+                div.removeChild(div.lastChild);
+            }, 10000);
         }
-        if(userChoice == "ROCK"){
+
+        else if(userChoice == computerChoice){
+            gameCount++;
+            currWin.textContent = "Its a tie!";
+        }
+        else if(userChoice == "ROCK"){
+            gameCount++;
             if(computerChoice == "PAPER") {
                 computer++;
-                return "Computer Won"
+                currWin.textContent =  "Computer Won";
             }
-            if(computerChoice == "SCISSOR"){
+            else if(computerChoice == "SCISSOR"){
                 user++;
-                return "You Won";
+                currWin.textContent = "You Won";
             }
         }
-        if(userChoice == "PAPER"){
+        else if(userChoice == "PAPER"){
+            gameCount++;
             if(computerChoice == "ROCK") {
                 user++;
-                return "You Won"
+                currWin.textContent = "You Won";
             }
-            if(computerChoice == "SCISSOR"){
+            else if(computerChoice == "SCISSOR"){
                 computer++;
-                return "Computer Won";
+                currWin.textContent =  "Computer Won";
             } 
         }
-        if(userChoice == "SCISSOR"){
+        else if(userChoice == "SCISSOR"){
+            gameCount++;
             if(computerChoice == "ROCK"){
                 computer++;
-                return "Computer Won";
+                currWin.textContent =  "Computer Won";
             } 
-            if(computerChoice == "PAPER") {
+            else if(computerChoice == "PAPER") {
                 user++;
-                return "You Won";
+                currWin.textContent = "You Won";
             }
         }
+        UserScore.textContent = "Your score : " + user;
+        CompScore.textContent = "Computer score : " + computer;
 }
+)
+}
+)
 
-for(let i=0 ; i<5 ; i++){
-    let userChoice = prompt("Enter your move");
-    userChoice = userChoice.toUpperCase();
-    let computerChoice = getComputerChoice();
-    let message = play(userChoice,computerChoice);
-    alert(message);
-}
-console.log("GAME OVER")
-console.log("Your score : " + user);
-console.log("Computer score : " + computer);
-if(user > computer){
-    console.log("Congratulations you won");
-}
-else if(user == computer){
-    console.log("The match is a tie");
-}
-else{
-    console.log("uhooh! YOU LOST!!")
-}
