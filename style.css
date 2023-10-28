@@ -38,3 +38,7 @@ button{
     color: white;
     font-family: 'Press Start 2P', sans-serif;
 }
+.current-winner{
+    font-size: 50px;
+    margin: auto;
+}
