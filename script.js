@@ -9,7 +9,8 @@ const GameOver = document.querySelector('.Game-Over');
 const UserScore = document.querySelector('.User-Score');
 const CompScore= document.querySelector('.Comp-Score');
 const FinalMsg= document.querySelector('.Final-Message');
-const div= document.querySelector('div');
+
+const reset = document.querySelector('.Reset');
 getComputerChoice = ()=> {
     randomChoice = array[(Math.floor(Math.random() * array.length))];
     return randomChoice;
@@ -20,7 +21,7 @@ btn.forEach(function(e){e.addEventListener('click',() => {
         computerChoice = getComputerChoice();
         
         if(gameCount >=5){
-            GameOver.textContent = "GAME OVER";
+            GameOver.textContent = "GAME OVER!!!";
             if(user > computer){
                 FinalMsg.textContent = "Congratulations you won";
             }
@@ -31,18 +32,17 @@ btn.forEach(function(e){e.addEventListener('click',() => {
             else{
                 FinalMsg.textContent = "uhooh! YOU LOST!!";
             }
-            const para = document.createElement('p');
-            para.textContent = "Resetting Game in 10 seconds....";
-            div.appendChild(para);
+            reset.textContent = "Resetting Game in 10 seconds....";
             setTimeout(()=>{
                 user = 0;
                 computer =0;
                 gameCount =0;
                 GameOver.textContent ="";
                 FinalMsg.textContent ="";
-                UserScore.textContent = "Your score : " + user;
-                CompScore.textContent = "Computer score : " + computer;
-                div.removeChild(div.lastChild);
+                currWin.textContent = "";
+                UserScore.textContent = "Your Score : " + user;
+                CompScore.textContent = "Computer Score : " + computer;
+                reset.textContent = "";
             }, 10000);
         }
 
@@ -83,8 +83,8 @@ btn.forEach(function(e){e.addEventListener('click',() => {
                 currWin.textContent = "You Won";
             }
         }
-        UserScore.textContent = "Your score : " + user;
-        CompScore.textContent = "Computer score : " + computer;
+        UserScore.textContent = "Your   Score : " + user;
+        CompScore.textContent = "Computer Score : " + computer;
 }
 )
 }
