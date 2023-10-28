@@ -9,6 +9,7 @@ const GameOver = document.querySelector('.Game-Over');
 const UserScore = document.querySelector('.User-Score');
 const CompScore= document.querySelector('.Comp-Score');
 const FinalMsg= document.querySelector('.Final-Message');
+const text = document.querySelector('.text');
 
 const reset = document.querySelector('.Reset');
 getComputerChoice = ()=> {
@@ -40,6 +41,7 @@ btn.forEach(function(e){e.addEventListener('click',() => {
                 GameOver.textContent ="";
                 FinalMsg.textContent ="";
                 currWin.textContent = "";
+                text.textContent = "";
                 UserScore.textContent = "Your Score : " + user;
                 CompScore.textContent = "Computer Score : " + computer;
                 reset.textContent = "";
@@ -48,39 +50,54 @@ btn.forEach(function(e){e.addEventListener('click',() => {
 
         else if(userChoice == computerChoice){
             gameCount++;
-            currWin.textContent = "Its a tie!";
+            if(userChoice=="PAPER"){
+                currWin.textContent = '✋ ✋';
+            }
+            else if(userChoice=="ROCK"){
+                currWin.textContent = '✊ ✊';
+            }
+            else{
+                currWin.textContent = '✌️ ✌️';
+            }
+            text.textContent = "It's tie";
         }
         else if(userChoice == "ROCK"){
             gameCount++;
             if(computerChoice == "PAPER") {
                 computer++;
-                currWin.textContent =  "Computer Won";
+                currWin.textContent = '✊ ✋';
+                text.textContent = "You Lost!!";
             }
             else if(computerChoice == "SCISSOR"){
                 user++;
-                currWin.textContent = "You Won";
+                currWin.textContent = "✊ ✌️";
+                text.textContent = "You Won!!";
             }
         }
         else if(userChoice == "PAPER"){
             gameCount++;
             if(computerChoice == "ROCK") {
                 user++;
-                currWin.textContent = "You Won";
+                currWin.textContent = "✋ ✊";
+                text.textContent = "You Won!!";
             }
             else if(computerChoice == "SCISSOR"){
                 computer++;
-                currWin.textContent =  "Computer Won";
+                currWin.textContent = "✋ ✌️";
+                text.textContent = "You Lost!!";
             } 
         }
         else if(userChoice == "SCISSOR"){
             gameCount++;
             if(computerChoice == "ROCK"){
                 computer++;
-                currWin.textContent =  "Computer Won";
+                currWin.textContent =  "✌️ ✊";
+                text.textContent = "You Lost!!";
             } 
             else if(computerChoice == "PAPER") {
                 user++;
-                currWin.textContent = "You Won";
+                currWin.textContent = "✌️ ✋";
+                text.textContent = "You Won!!";
             }
         }
         UserScore.textContent = "Your   Score : " + user;
