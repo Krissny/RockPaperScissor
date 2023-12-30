@@ -33,18 +33,16 @@ btn.forEach(function(e){e.addEventListener('click',() => {
             else{
                 FinalMsg.textContent = "uhooh! YOU LOST!!";
             }
-            reset.textContent = "Resetting Game in 10 seconds....";
+            let time = 10;
+            reset.textContent = `Resetting Game in ${time} seconds`;
+            setInterval(countdown,1000);
+            function countdown(){
+                console.log("Runs");
+                reset.textContent = `Resetting Game in ${time} seconds`;
+                time--;
+            }
             setTimeout(()=>{
-                user = 0;
-                computer =0;
-                gameCount =0;
-                GameOver.textContent ="";
-                FinalMsg.textContent ="";
-                currWin.textContent = "";
-                text.textContent = "";
-                UserScore.textContent = "Your Score : " + user;
-                CompScore.textContent = "Computer Score : " + computer;
-                reset.textContent = "";
+                location.reload();
             }, 10000);
         }
 
