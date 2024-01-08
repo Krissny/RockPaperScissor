@@ -34,6 +34,9 @@ btn.forEach(function(e){e.addEventListener('click',() => {
                 FinalMsg.textContent = "uhooh! YOU LOST!!";
             }
             let time = 10;
+            document.querySelector('.rock').disabled = true;
+            document.querySelector('.paper').disabled = true;
+            document.querySelector('.scissor').disabled = true;
             reset.textContent = `Resetting Game in ${time} seconds`;
             setInterval(countdown,1000);
             function countdown(){
